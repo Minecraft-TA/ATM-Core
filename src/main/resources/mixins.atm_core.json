@@ -1,0 +1,6 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.github.minecraft_ta.atmcore.mixin",
+  "mixins": [
+  ]
+}
