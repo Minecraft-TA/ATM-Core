@@ -24,8 +24,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 
 minecraft {
     mappings channel: mappings_channel, version: mappings_version
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     String myJvmArgs = "-Dfml.coreMods.load=${mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)}"
     String myRunArgs = "--mixin ${mod_mixin_configs.replace('${mod_id}', mod_id)}"
