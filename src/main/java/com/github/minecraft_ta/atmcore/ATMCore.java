@@ -36,8 +36,8 @@ import java.util.Random;
 
 )
 public class ATMCore {
-    public static final String MOD_ID = "atm_core";
 
+    public static final String MOD_ID = "atm_core";
     public static final String MOD_NAME = "ATM Core";
     public static final String VERSION = "1.0.0";
 
@@ -45,6 +45,7 @@ public class ATMCore {
     public static ATMCore INSTANCE;
 
     public static Logger LOGGER;
+    private long timeStamp;
 
     @Mod.EventHandler
     public void onPreInit(FMLPreInitializationEvent event) {
@@ -57,6 +58,30 @@ public class ATMCore {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    @SubscribeEvent
+    public void onServerTick(TickEvent.WorldTickEvent event) {
+  /*      if (event.side.isServer()) {
+            World world = event.world;
+            Random rand = world.rand;
+            if ((System.currentTimeMillis() - timeStamp) >= 1000) {
+                if (rand instanceof RandomCounter) {
+                  *//*  int counter = ((RandomCounter) rand).getCounter();
+                    world.playerEntities.forEach(entityPlayer ->
+                            entityPlayer.sendMessage(new TextComponentString("Random calls in " + world.provider.getDimensionType().getName() + ": ").setStyle(new Style().setColor(TextFormatting.AQUA))
+                                    .appendSibling(new TextComponentString(counter + "").setStyle(new Style().setColor(TextFormatting.GOLD)))));
+                    LOGGER.info("Random calls: " + counter);
+                    ((RandomCounter) rand).setCounter(0);*//*
+
+                    for (WorldServer worldServer : Objects.requireNonNull(world.getMinecraftServer()).worlds) {
+                        LOGGER.info(worldServer.provider.getDimensionType().getName() + " " + worldServer.provider.getDimensionType().getId());
+
+                    }
+                }
+                timeStamp = System.currentTimeMillis();
+            }
+        }*/
+    }
+
     @GameRegistry.ObjectHolder(MOD_ID)
     public static class Blocks {
         public static final RandomBlock RANDOM_BLOCK = null;
@@ -66,7 +91,6 @@ public class ATMCore {
     public static class Items {
         public static final ItemBlock RANDOM_BLOCK_ITEM = null;
     }
-
 
     @Mod.EventBusSubscriber
     public static class ObjectRegistryHandler {
@@ -90,30 +114,4 @@ public class ATMCore {
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
         }
     }
-
-    private long timeStamp;
-
-  /*  @SubscribeEvent
-    public void onServerTick(TickEvent.WorldTickEvent event) {
-        if (event.side.isServer()) {
-            World world = event.world;
-            Random rand = world.rand;
-            if ((System.currentTimeMillis() - timeStamp) >= 1000) {
-                if (rand instanceof RandomCounter) {
-                    int counter = ((RandomCounter) rand).getCounter();
-                    world.playerEntities.forEach(entityPlayer ->
-                            entityPlayer.sendMessage(new TextComponentString("Random calls in " + world.provider.getDimensionType().getName() + ": ").setStyle(new Style().setColor(TextFormatting.AQUA))
-                                    .appendSibling(new TextComponentString(counter + "").setStyle(new Style().setColor(TextFormatting.GOLD)))));
-                    LOGGER.info("Random calls: " + counter);
-                    ((RandomCounter) rand).setCounter(0);
-
-                    for (WorldServer worldServer : Objects.requireNonNull(world.getMinecraftServer()).worlds) {
-                        LOGGER.info(worldServer.provider.getDimensionType().getName() + " " + worldServer.provider.createChunkGenerator().toString());
-
-                    }
-                }
-                timeStamp = System.currentTimeMillis();
-            }
-        }
-    }*/
 }
