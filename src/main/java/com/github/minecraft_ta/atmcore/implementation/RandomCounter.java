@@ -7,15 +7,9 @@ public class RandomCounter extends Random {
     private int counter;
 
     @Override
-    public int nextInt() {
+    public int next(int bits) {
         counter++;
-        return super.nextInt();
-    }
-
-    @Override
-    public int nextInt(int bound) {
-        counter++;
-        return super.nextInt(bound);
+        return super.next(bits);
     }
 
     public int getCounter() {
